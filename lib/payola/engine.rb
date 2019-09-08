@@ -32,8 +32,10 @@ module Payola
       Payola.configure do |config|
         config.subscribe 'invoice.payment_succeeded',     Payola::InvoicePaid
         config.subscribe 'invoice.payment_failed',        Payola::InvoiceFailed
+        config.subscribe 'customer.subscription.created', Payola::CustomerSubscriptionCreated
         config.subscribe 'customer.subscription.updated', Payola::SyncSubscription
         config.subscribe 'customer.subscription.deleted', Payola::SubscriptionDeleted
+        config.subscribe 'setup_intent.succeeded', Payola::SetupIntentSucceeded
       end
     end
   end

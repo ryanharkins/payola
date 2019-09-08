@@ -38,9 +38,17 @@ module Payola
       end
 
       def update_sale_with_charge(sale, charge, secret_key)
+        card_details = charge.payment_method_details.card
         sale.stripe_id  = charge.id
-        sale.card_type  = charge.source.brand
-        sale.card_last4 = charge.source.last4
+        sale.card_type  = card_details.brand
+        sale.card_last4 = card_details.last4
+        sale.hosted_receipt_url = charge.receipt_url
+
+        sale.owner.update_attributes(
+          card_last4: card_details.last4,
+          card_expiration: "01-#{card_details.exp_month}-#{card_details.exp_year}",
+          card_type: card_details.brand.upcase
+        )
 
         if charge.respond_to?(:fee)
           sale.fee_amount = charge.fee
