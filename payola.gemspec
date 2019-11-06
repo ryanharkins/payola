@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     f.match(%r{^(test|spec|features)/})
   end
 
-  s.add_dependency "rails", ">= 4.1"
+  s.add_dependency "rails", "6.0.1"
   s.add_dependency "jquery-rails"
   s.add_dependency "stripe", ">= 2.8"
   s.add_dependency "aasm", ">= 4.0.7"
