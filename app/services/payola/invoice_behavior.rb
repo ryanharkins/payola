@@ -44,8 +44,8 @@ module Payola
         sale.card_last4 = card_details.last4
         sale.hosted_receipt_url = charge.receipt_url
 
-        sale.owner.update_attributes(
           card_last4: card_details.last4,
+        sale.owner.update(
           card_expiration: "01-#{card_details.exp_month}-#{card_details.exp_year}",
           card_type: card_details.brand.upcase
         )

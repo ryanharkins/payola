@@ -32,7 +32,7 @@ module Payola
 
         # Update card details on subscription model
         pm = Stripe::PaymentMethod.retrieve(event.data.object.payment_method)
-        company.current_subscription.update_attributes(
+        company.current_subscription.update(
           card_last4: pm.card.last4,
           card_expiration: "1-#{pm.card.exp_month}-#{pm.card.exp_year}",
           card_type: pm.card.brand.upcase
